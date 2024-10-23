@@ -46,7 +46,7 @@ $conn->close();
 </head>
 <body>
     <div class="login-container">
-        <h1>Sign Up Contact</h1>
+        <h1>Sign Up to Contact</h1>
         <?php if ($signup_error): ?>
             <p class="error"><?php echo htmlspecialchars($signup_error); ?></p>
         <?php endif; ?>
