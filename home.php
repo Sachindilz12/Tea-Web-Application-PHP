@@ -19,6 +19,12 @@ if (isset($_GET['lang'])) {
 include "languages/" . $_SESSION['lang'] . ".php";
 ?>
 
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,6 +51,7 @@ include "languages/" . $_SESSION['lang'] . ".php";
                 <li><a href="scan_login.php">Scan</a></li>
                 <li><a href="inventory.php">Inventory</a></li>
                 <li><a href="supply.php">Supply</a></li>
+             
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Prediction</a>
                     <div class="dropdown-content">
@@ -52,6 +59,7 @@ include "languages/" . $_SESSION['lang'] . ".php";
                         <a href="sales.php">Sales Prediction</a>
                     </div>
                 </li>
+              
                 <li><a href="tracking.php">Tracking</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="logout.php">Logout</a></li>

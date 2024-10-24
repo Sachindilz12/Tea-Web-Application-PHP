@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body{
+    font-family: Poppins;
+}
+
+
 .sales_predict {
     width: 50%;
     margin: 50px auto;
@@ -14,7 +21,6 @@
 .sales_chart h1 {
     margin-top: 10%;
     color: white;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 40px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Adding a shadow */
     transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for hover effect */
@@ -27,7 +33,6 @@
 
 .sales_gross h1{
     color: white;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 40px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Adding a shadow */
     transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for hover effect */

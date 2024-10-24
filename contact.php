@@ -45,56 +45,31 @@ ob_end_flush(); // End output buffering and flush the buffer
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="contact.css">
 
-    <!-- Include EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    
     <script type="text/javascript">
-        // Initialize EmailJS with your public key
-        (function() {
-            emailjs.init({
-                publicKey: "2R6UXBmQUWKGYz2P_" // Your actual EmailJS public key
-            });
-        })();
-        
-        // Function to send email
-        function sendEmail(e) {
-            e.preventDefault(); // Prevent the form from submitting normally
-            
-            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', '#contact-form')
-                .then(function(response) {
-                    alert('Email sent successfully!', response.status, response.text);
-                }, function(error) {
-                    alert('Failed to send email.', error);
-                });
-        }
+       (function(){
+          emailjs.init("2R6UXBmQUWKGYz2P_"); // Initialize with your public key
+       })();
     </script>
+
+    <script src="script.js"></script>    
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="container">
-                <h1>Your Name</h1>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+  
 
     <section id="about" class="container">
-        <h2>About Me</h2>
-        <p>Your introduction and information about yourself goes here.</p>
+        <h2>Messege </h2>
+        <p>Send the Messeges through Form.</p>
     </section>
 
     <section id="contact" class="container">
         <h2>Contact Me</h2>
-        
-        <form id="contact-form" onsubmit="sendEmail(event)">
+
+        <form id="contact-form">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
@@ -115,7 +90,7 @@ ob_end_flush(); // End output buffering and flush the buffer
                 <textarea id="message" name="message" rows="4" required></textarea>
             </div>
             
-            <button type="submit">Send Message</button>
+            <button type="submit" onclick="sendMail()">Send Message</button>
         </form>
     </section>
 </body>

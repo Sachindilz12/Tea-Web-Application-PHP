@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_driver'])) {
     try {
         if (mysqli_query($conn, $insert_sql)) {
             echo "New driver added successfully.";
-            header("Location: admin.php"); // Refresh to see the new data
+            header("Location: admin_dashboard.php"); // Refresh to see the new data
             exit();
         }
     } catch (mysqli_sql_exception $e) {
@@ -53,7 +53,7 @@ if (isset($_GET['delete'])) {
     
     if (mysqli_query($conn, $delete_sql)) {
         echo "Driver deleted successfully.";
-        header("Location: admin.php"); // Refresh to see the updated list
+        header("Location: admin_dashboard.php"); // Refresh to see the updated list
         exit();
     } else {
         echo "Error deleting driver: " . mysqli_error($conn);
@@ -105,7 +105,7 @@ mysqli_close($conn);
             <td><?php echo htmlspecialchars($row['latitude']); ?></td>
             <td>
                 <!-- Delete button -->
-                <a href="admin.php?delete=<?php echo urlencode($row['username']); ?>" onclick="return confirm('Are you sure you want to delete this driver?');">Delete</a>
+                <a href="admin_dashboard.php?delete=<?php echo urlencode($row['username']); ?>" onclick="return confirm('Are you sure you want to delete this driver?');">Delete</a>
             </td>
         </tr>
         <?php } ?>

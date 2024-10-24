@@ -45,7 +45,7 @@ $conn->close();
 </head>
 <body>
     <div class="login-container">
-        <h1>Admin Login to Access Scan</h1>
+        <h1>Admin Login</h1>
         <?php if ($login_error): ?>
             <p class="error"><?php echo htmlspecialchars($login_error); ?></p>
         <?php endif; ?>

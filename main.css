@@ -50,16 +50,14 @@ body{
     background-repeat: no-repeats;
     background-attachment: fixed;
    animation: change 60000ms infinite ease-in-out;
+   font-family: Poppins;
       
 }
 
 header {
     width: 100%;
-    padding: 10px 0;
-    position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000;
 }
 
 nav {
@@ -77,26 +75,27 @@ nav ul {
 
 nav ul li {
     margin: 0 2px;
-    padding:30px 10px;
+    padding:20px 10px;
 }
 
 nav ul li a {
-    color: #000000;
+    color: #ffffff;
         text-decoration: none;
+        padding: 10px;
         font-size: 20px;
         font-family:poppins;
         transition: background-color 0.3s, color 0.3s;
 }
 
 nav ul li a:hover {
-    background-color: #519a44;
-    color: #fff;
+    background-color: #46d6e0;
+    color: #000000;
     border-radius: 50px;
     text-decoration: none;
 }
 
 nav ul li a:active {
-    background-color: #2fa05c;
+    background-color: #46d6e0;
 }
 
 nav ul li a:focus {
@@ -140,14 +139,14 @@ nav ul li .dropdown-content a {
     text-decoration: none;
     display: block;
     font-size: 18px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Poppins;
     transition: background-color 0.3s, color 0.3s;
 }
 
 /* Change the background color and text color on hover */
 nav ul li .dropdown-content a:hover {
-    background-color: #519a44; /* Match the hover color in nav */
-    color: #fff;
+    background-color: #46d6e0; /* Match the hover color in nav */
+    color: #000000;
 }
 
 /* Show the dropdown content on hover */
@@ -157,8 +156,8 @@ nav ul li:hover .dropdown-content {
 
 /* Style the dropdown button when hovered to match the nav links */
 nav ul li .dropbtn:hover {
-    background-color: #519a44;
-    color: #fff;
+    background-color: #46d6e0;
+    color: #000000;
     border-radius: 50px;
 }
 
