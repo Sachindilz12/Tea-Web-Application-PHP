@@ -69,10 +69,11 @@ mysqli_close($conn);
 <head>
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="admin_dashboard.css">
 
 </head>
 <body>
-    <h2>Admin Dashboard</h2>
+    <h1>Admin Dashboard</h1>
     <form method="POST" action="">
         Vehicle Name: <input type="text" name="vehicle_name" required><br>
         Vehicle Number: <input type="text" name="vehicle_no" required><br>
@@ -82,7 +83,7 @@ mysqli_close($conn);
         <input type="submit" name="add_driver" value="Add Driver">
     </form>
 
-    <h3>Driver List</h3>
+    <h1>Driver List</h1>
     <table border="1">
         <tr>
             <th>Vehicle Name</th>

@@ -1,0 +1,40 @@
+/* Center everything on the page */
+body {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin:20%;
+}
+
+/* Style for the main title */
+h1 {
+    font-size: 3rem;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px #ecf0f1;
+}
+
+/* Style the buttons */
+button {
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* Make buttons responsive */
+button:active {
+    transform: scale(0.98);
+}

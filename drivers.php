@@ -8,7 +8,6 @@ include('db.php'); // Database connection
 
 $driver_username = $_SESSION['driver'];
 
-// If 'longitude' and 'latitude' are received from POST, update the driver's location
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['longitude']) && isset($_POST['latitude'])) {
     $longitude = $_POST['longitude']; // Get longitude from form input
     $latitude = $_POST['latitude'];   // Get latitude from form input
