@@ -56,16 +56,14 @@ h1 {
   margin-block: 2rem;
 }
 
-.all{
-display: flex;}
 
 
 .datetime {
     text-align: center;
     color: #ffffff;
-    background: radial-gradient(circle at top left, #ff7f50, #ff4500);
+    background: radial-gradient(circle at top left, #ff7f50, #000000);
     padding: 25px 70px;
-    margin: 20px auto;
+    margin: 50px auto;
     font-weight: bold;
     font-size: 1.8rem;
     letter-spacing: 0.1em;

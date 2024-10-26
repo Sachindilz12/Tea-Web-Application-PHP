@@ -68,7 +68,6 @@ include "languages/" . $_SESSION['lang'] . ".php";
             <button onclick="location.href='scan_login.php'"><?php echo $lang['scan_button']; ?></button>
         </div>
 
-<div class="all">
 
         <div class="datetime">
             <p id="clock"></p>
@@ -95,7 +94,6 @@ include "languages/" . $_SESSION['lang'] . ".php";
                 </ul>
                 <ul class="dates"></ul>
             </section>
-        </div>
         </div>
 
 
