@@ -22,21 +22,25 @@ if (!isset($_SESSION['username'])) {
   <body>
   <header>
         <nav>
-            <ul>
-         
-                <li><a href="home.php">Home</a></li>
-                <li><a href="scan.php">Scan</a></li>
-                <li><a href="supply.php">Supply</a></li>
-                <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Prediction</a>
-                <div class="dropdown-content">
-                    <a href="weight.php">Weight Prediction</a>
-                    <a href="sales.php">Sales Prediction</a>
-                </div>
-            </li>
-                <li><a href="inventory.php">Inventory</a></li>
-                <li><a href="logout.php">Logout</a></li>
-            </ul>   
+        <ul>
+        <li><a href="home.php">Home</a></li>
+
+           <li><a href="scan_login.php">Scan</a></li>
+           <li><a href="inventory.php">Inventory</a></li>
+           <li><a href="teabook.php">Tea Book</a></li>
+
+           <li><a href="supply.php">Supply</a></li>
+           <li class="dropdown">
+               <a href="javascript:void(0)" class="dropbtn">Prediction</a>
+               <div class="dropdown-content">
+                   <a href="weight.php">Weight Prediction</a>
+                   <a href="sales.php">Sales Prediction</a>
+               </div>
+           </li>
+           <li><a href="tracking.php">Tracking</a></li>
+           <li><a href="contact.php">Contact</a></li>
+           <li><a href="logout.php">Logout</a></li>
+       </ul>  
         </nav>
     </header>
     <div class="weight_chart">

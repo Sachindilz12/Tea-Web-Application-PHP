@@ -70,29 +70,30 @@ $result = $conn->query("SELECT * FROM inventory");
         
         .modal {
             display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
         }
 
         .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
+            background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+ font-family: Poppins;
+    width: 90%;
         }
 
         .close {
-            color: green;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+            position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
         }
 
         .close:hover,
@@ -166,19 +167,23 @@ button[type="submit"]:hover {
 <body>
     <header>
         <nav>
-            <ul>
-                <li><a href="home.php">Home</a></li>
-                <li><a href="scan.php">Scan</a></li>
-                <li><a href="supply.php">Supply</a></li>
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">Prediction</a>
-                    <div class="dropdown-content">
-                        <a href="weight.php">Weight Prediction</a>
-                        <a href="sales.php">Sales Prediction</a>
-                    </div>
-                </li>
-                <li><a href="logout.php">Logout</a></li>
-            </ul>
+        <ul>
+        <li><a href="home.php">Home</a></li>
+
+           <li><a href="scan_login.php">Scan</a></li>
+           <li><a href="teabook.php">Tea Book</a></li>
+           <li><a href="supply.php">Supply</a></li>
+           <li class="dropdown">
+               <a href="javascript:void(0)" class="dropbtn">Prediction</a>
+               <div class="dropdown-content">
+                   <a href="weight.php">Weight Prediction</a>
+                   <a href="sales.php">Sales Prediction</a>
+               </div>
+           </li>
+           <li><a href="tracking.php">Tracking</a></li>
+           <li><a href="contact.php">Contact</a></li>
+           <li><a href="logout.php">Logout</a></li>
+       </ul>
         </nav>
     </header>
     <main>
@@ -186,7 +191,6 @@ button[type="submit"]:hover {
             <h1>Inventory</h1>
             <button id="openFormBtn">Add New Entry</button>
 
-           
             <div id="popupForm" class="modal">
                 <div class="modal-content">
                     <span id="closeFormBtn" class="close">&times;</span>
@@ -260,7 +264,6 @@ button[type="submit"]:hover {
                             <td>
                                 <form method="POST" action="">
                                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($row['id']); ?>">
-                                    <button type="submit" name="edit">Edit</button>
                                     <button type="submit" name="delete" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</button>
                                 </form>
                             </td>

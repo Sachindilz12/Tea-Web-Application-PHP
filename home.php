@@ -45,6 +45,8 @@ include "languages/" . $_SESSION['lang'] . ".php";
             </div>
                 <li><a href="scan_login.php">Scan</a></li>
                 <li><a href="inventory.php">Inventory</a></li>
+                <li><a href="teabook.php">Tea Book</a></li>
+
                 <li><a href="supply.php">Supply</a></li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Prediction</a>
@@ -61,7 +63,13 @@ include "languages/" . $_SESSION['lang'] . ".php";
     </header> 
 
     <main>
-       
+    
+    <div class="datetime">
+            <p id="clock"></p>
+            <p id="date"></p>
+        </div>   
+
+
     <div class="content">
             <h1><?php echo $lang['welcome']; ?></h1>
             <p><?php echo $lang['instruction']; ?></p>
@@ -69,10 +77,6 @@ include "languages/" . $_SESSION['lang'] . ".php";
         </div>
 
 
-        <div class="datetime">
-            <p id="clock"></p>
-            <p id="date"></p>
-        </div>
 
         <div class="calendar">
             <header>
