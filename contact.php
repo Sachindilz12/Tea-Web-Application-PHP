@@ -42,7 +42,7 @@
     </section>
 
     <section id="contact" class="container">
-        <h2>Contact Me</h2>
+        <h2>Message Section</h2>
 
         <form id="contact-form" onsubmit="sendMail(event)">
             <div class="form-group">

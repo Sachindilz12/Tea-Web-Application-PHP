@@ -44,7 +44,33 @@ if (isset($_GET['delete_entry'])) {
     $entry_id = $_GET['delete_entry'];
     $conn->query("DELETE FROM tea_book WHERE entry_id = $entry_id");
 }
+
+// Handle filter form submission
+$filterResult = null;
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['filter'])) {
+    $customer_id = $_POST['filter_customer_id'];
+    $year = $_POST['filter_year'];
+    $month = $_POST['filter_month'];
+
+    $stmt = $conn->prepare("SELECT customers.name, SUM(tea_book.bags) AS total_bags, SUM(tea_book.gross_weight) AS total_gross_weight, SUM(tea_book.net_weight) AS total_net_weight 
+                            FROM tea_book 
+                            JOIN customers ON tea_book.customer_id = customers.customer_id 
+                            WHERE tea_book.customer_id = ? AND YEAR(tea_book.entry_date) = ? AND MONTH(tea_book.entry_date) = ? 
+                            GROUP BY tea_book.customer_id");
+    $stmt->bind_param("iii", $customer_id, $year, $month);
+    $stmt->execute();
+    $filterResult = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+}
 ?>
+
+
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -78,6 +104,33 @@ if (isset($_GET['delete_entry'])) {
        </ul>
         </nav>
     </header>
+
+
+
+
+
+    <div class="filter_panel">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <h2>Filter Tea Book Entries</h2>
+            <form method="POST">
+                <input type="number" name="filter_customer_id" placeholder="Customer ID" required>
+                <input type="number" name="filter_year" placeholder="Year" required>
+                <input type="number" name="filter_month" placeholder="Month" required>
+                <button type="submit" name="filter">Filter</button>
+            </form>
+            <?php if ($filterResult): ?>
+                <div class="filter-result">
+                    <h3>Filtered Results</h3>
+                    <p>Name: <?= $filterResult['name'] ?></p>
+                    <p>Total Bags: <?= $filterResult['total_bags'] ?></p>
+                    <p>Total Gross Weight: <?= $filterResult['total_gross_weight'] ?></p>
+                    <p>Total Net Weight: <?= $filterResult['total_net_weight'] ?></p>
+                </div>
+            <?php endif; ?>
+        </div>
+
+
     <div class="container">
         <!-- Customer Table Section -->
         <div class="table-section">
@@ -224,5 +277,22 @@ if (isset($_GET['delete_entry'])) {
             }
         }
     </script>
+
+<script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal(event.target.id);
+            }
+        }
+    </script>
+
 </body>
 </html>
