@@ -26,27 +26,56 @@ include "languages/" . $_SESSION['lang'] . ".php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="main.css">
-
     <title>Home - Tea Quality App</title>
+    
+    <style>
+        .langform {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 20px;
+}
+
+.langform form {
+    display: inline-block;
+}
+
+.langform select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.langform select:focus {
+    outline: none;
+    border-color: #007bff;
+    background-color: #e9f5ff;
+}
+
+.langform select option {
+    color: #333;
+    padding: 5px 10px;
+}
+
+.langform select option[selected] {
+    font-weight: bold;
+}
+
+    </style>
 </head>
 <body>
     <header>
         <nav>
              
             <ul>
-            <div class="langform">
-                <form method="get" id="lang-form" action="">
-                    <select name="lang" onchange="document.getElementById('lang-form').submit();">
-                        <option value="en" <?php if ($_SESSION['lang'] == 'en') echo 'selected'; ?>>English</option>
-                        <option value="si" <?php if ($_SESSION['lang'] == 'si') echo 'selected'; ?>>Sinhala</option>
-                        <option value="ta" <?php if ($_SESSION['lang'] == 'ta') echo 'selected'; ?>>Tamil</option>
-                    </select>
-                </form>
-            </div>
+            
                 <li><a href="scan_login.php">Scan</a></li>
                 <li><a href="inventory.php">Inventory</a></li>
                 <li><a href="teabook.php">Tea Book</a></li>
-
                 <li><a href="supply.php">Supply</a></li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Prediction</a>
@@ -61,7 +90,15 @@ include "languages/" . $_SESSION['lang'] . ".php";
             </ul>
         </nav>
     </header> 
-
+    <div class="langform">
+                <form method="get" id="lang-form" action="">
+                    <select name="lang" onchange="document.getElementById('lang-form').submit();">
+                        <option value="en" <?php if ($_SESSION['lang'] == 'en') echo 'selected'; ?>>English</option>
+                        <option value="si" <?php if ($_SESSION['lang'] == 'si') echo 'selected'; ?>>Sinhala</option>
+                        <option value="ta" <?php if ($_SESSION['lang'] == 'ta') echo 'selected'; ?>>Tamil</option>
+                    </select>
+                </form>
+            </div>
     <main>
     
     <div class="datetime">
@@ -179,8 +216,10 @@ include "languages/" . $_SESSION['lang'] . ".php";
                 renderCalendar();
             });
         });
-
         renderCalendar();
     </script>
+
+
+
 </body>
 </html>

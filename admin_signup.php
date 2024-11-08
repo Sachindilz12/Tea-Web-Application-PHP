@@ -29,9 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['signup'])) {
 
         if ($stmt->execute()) {
             $signup_success = "Signup successful. You can now log in.";
-            // Optionally, redirect to login after a delay
-            // header("refresh:2;url=admin_login.php");
-            // exit();
+           // Optionally, redirect to login after a delay
+          //  header("refresh:2;url=admin_login.php");
+          //   exit();
         } else {
             $signup_error = "Error during signup. Please try again.";
         }
@@ -51,7 +51,7 @@ $conn->close();
     <title>Admin Signup</title>
 </head>
 <body>
-    <div class="login-container">
+    <div class="signup-container">
         <h1>Admin Signup</h1>
         <?php if ($signup_error): ?>
             <p class="error"><?php echo htmlspecialchars($signup_error); ?></p>

@@ -3,19 +3,21 @@
 include 'db.php';
 
 // Handle customer form submission
+// Handle customer form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_customer'])) {
     $name = $_POST['name'];
     $address = $_POST['address'];
     $phone = $_POST['phone'];
     $route = $_POST['route'];
     $year = $_POST['year'];
-    $month = $_POST['month'];
 
-    $stmt = $conn->prepare("INSERT INTO customers (name, address, phone_number, route, year, month) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssii", $name, $address, $phone, $route, $year, $month);
+    // Adjust SQL query to remove 'month' if it's not necessary
+    $stmt = $conn->prepare("INSERT INTO customers (name, address, phone_number, route, year) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssi", $name, $address, $phone, $route, $year);
     $stmt->execute();
     $stmt->close();
 }
+
 
 // Handle tea book form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_tea_book'])) {
@@ -33,44 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_tea_book'])) {
     $stmt->execute();
     $stmt->close();
 }
-
-// Handle delete actions
-if (isset($_GET['delete_customer'])) {
-    $customer_id = $_GET['delete_customer'];
-    $conn->query("DELETE FROM customers WHERE customer_id = $customer_id");
-}
-
-if (isset($_GET['delete_entry'])) {
-    $entry_id = $_GET['delete_entry'];
-    $conn->query("DELETE FROM tea_book WHERE entry_id = $entry_id");
-}
-
-// Handle filter form submission
-$filterResult = null;
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['filter'])) {
-    $customer_id = $_POST['filter_customer_id'];
-    $year = $_POST['filter_year'];
-    $month = $_POST['filter_month'];
-
-    $stmt = $conn->prepare("SELECT customers.name, SUM(tea_book.bags) AS total_bags, SUM(tea_book.gross_weight) AS total_gross_weight, SUM(tea_book.net_weight) AS total_net_weight 
-                            FROM tea_book 
-                            JOIN customers ON tea_book.customer_id = customers.customer_id 
-                            WHERE tea_book.customer_id = ? AND YEAR(tea_book.entry_date) = ? AND MONTH(tea_book.entry_date) = ? 
-                            GROUP BY tea_book.customer_id");
-    $stmt->bind_param("iii", $customer_id, $year, $month);
-    $stmt->execute();
-    $filterResult = $stmt->get_result()->fetch_assoc();
-    $stmt->close();
-}
 ?>
-
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -80,58 +45,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['filter'])) {
     <title>Teabook Management</title>
     <link rel="stylesheet" href="teabook.css">
     <link rel="stylesheet" href="main.css">
-
 </head>
 <body>
-<header>
+    <header>
         <nav>
-        <ul>
-        <li><a href="home.php">Home</a></li>
-
-           <li><a href="scan_login.php">Scan</a></li>
-           <li><a href="inventory.php">Inventory</a></li>
-           <li><a href="supply.php">Supply</a></li>
-           <li class="dropdown">
-               <a href="javascript:void(0)" class="dropbtn">Prediction</a>
-               <div class="dropdown-content">
-                   <a href="weight.php">Weight Prediction</a>
-                   <a href="sales.php">Sales Prediction</a>
-               </div>
-           </li>
-           <li><a href="tracking.php">Tracking</a></li>
-           <li><a href="contact.php">Contact</a></li>
-           <li><a href="logout.php">Logout</a></li>
-       </ul>
+            <ul>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="scan_login.php">Scan</a></li>
+                <li><a href="inventory.php">Inventory</a></li>
+                <li><a href="supply.php">Supply</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Prediction</a>
+                    <div class="dropdown-content">
+                        <a href="weight.php">Weight Prediction</a>
+                        <a href="sales.php">Sales Prediction</a>
+                    </div>
+                </li>
+                <li><a href="tracking.php">Tracking</a></li>
+                <li><a href="contact.php">Contact</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
         </nav>
     </header>
 
-
-
-
-
-    <div class="filter_panel">
-        <!-- Filter Section -->
-        <div class="filter-section">
-            <h2>Filter Tea Book Entries</h2>
-            <form method="POST">
-                <input type="number" name="filter_customer_id" placeholder="Customer ID" required>
-                <input type="number" name="filter_year" placeholder="Year" required>
-                <input type="number" name="filter_month" placeholder="Month" required>
-                <button type="submit" name="filter">Filter</button>
-            </form>
-            <?php if ($filterResult): ?>
-                <div class="filter-result">
-                    <h3>Filtered Results</h3>
-                    <p>Name: <?= $filterResult['name'] ?></p>
-                    <p>Total Bags: <?= $filterResult['total_bags'] ?></p>
-                    <p>Total Gross Weight: <?= $filterResult['total_gross_weight'] ?></p>
-                    <p>Total Net Weight: <?= $filterResult['total_net_weight'] ?></p>
-                </div>
-            <?php endif; ?>
-        </div>
-
+<!-- Navigation to Filter Page -->
+<button onclick="window.location.href='filter_teabook.php'" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 10px;">
+    Go to Filter Teabook
+</button>
 
     <div class="container">
+        
+
         <!-- Customer Table Section -->
         <div class="table-section">
             <h2>Customer Information</h2>
@@ -145,8 +89,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['filter'])) {
                         <th>Phone</th>
                         <th>Route</th>
                         <th>Year</th>
-                        <th>Month</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -160,8 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['filter'])) {
                                 <td>{$row['phone_number']}</td>
                                 <td>{$row['route']}</td>
                                 <td>{$row['year']}</td>
-                                <td>{$row['month']}</td>
-                                <td><a href='?delete_customer={$row['customer_id']}'>Delete</a></td>
                               </tr>";
                     }
                     ?>
@@ -185,7 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['filter'])) {
                         <th>Driver</th>
                         <th>Supervisor</th>
                         <th>Manager</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -202,7 +141,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['filter'])) {
                                 <td>{$row['lorry_driver']}</td>
                                 <td>{$row['factory_supervisor']}</td>
                                 <td>{$row['factory_manager']}</td>
-                                <td><a href='?delete_entry={$row['entry_id']}'>Delete</a></td>
                               </tr>";
                     }
                     ?>
@@ -217,12 +155,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['filter'])) {
             <span class="close" onclick="closeModal('customerModal')">&times;</span>
             <form method="POST">
                 <h2>Add Customer</h2>
-                <input type="text" name="name" placeholder="Name" required>
+                <input type="name" name="name" placeholder="Name" required>
                 <input type="text" name="address" placeholder="Address" required>
-                <input type="text" name="phone" placeholder="Phone Number" required>
+                <input type="number" name="phone" placeholder="Phone Number" required>
                 <input type="text" name="route" placeholder="Route" required>
-                <input type="number" name="year" placeholder="Year" required>
-                <input type="text" name="month" placeholder="Month" required>
+                <input type="date" name="year" placeholder="Year" required>
                 <button type="submit" name="add_customer">Add Customer</button>
             </form>
         </div>
@@ -277,22 +214,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['filter'])) {
             }
         }
     </script>
-
-<script>
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                closeModal(event.target.id);
-            }
-        }
-    </script>
-
 </body>
 </html>

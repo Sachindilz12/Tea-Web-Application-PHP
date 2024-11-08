@@ -57,7 +57,7 @@ if (!isset($_SESSION['username'])) {
             maxPredictions = model.getTotalClasses();
 
             const flip = true; // whether to flip the webcam
-            webcam = new tmImage.Webcam(300, 300, flip); // width, height, flip
+            webcam = new tmImage.Webcam(500, 500, flip); // width, height, flip
             await webcam.setup(); // request access to the webcam
             await webcam.play();
             window.requestAnimationFrame(loop);

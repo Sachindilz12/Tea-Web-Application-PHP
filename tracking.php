@@ -8,9 +8,14 @@
 
     <title>Vehicle Tracking</title>
 </head>
+
 <body>
+
     <h1>Vehicle Tracking System</h1>
     <button onclick="location.href='admin_login.php'">Admin</button>
     <button onclick="location.href='driver_login.php'">Drivers</button>
+    <button onclick="location.href='home.php'" style="background-color: #4CAF50;">Home</button>
+    
 </body>
+
 </html>

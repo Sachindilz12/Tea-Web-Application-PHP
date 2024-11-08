@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2024 at 07:24 AM
+-- Generation Time: Nov 02, 2024 at 07:29 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,6 @@ CREATE TABLE `admin_users` (
 --
 
 INSERT INTO `admin_users` (`id`, `username`, `company_code`, `password`, `created_at`) VALUES
-(2, 'kasun', 'driver2', 'kasun123', '2024-10-22 06:48:25'),
 (3, 'sachin', 'admin1', 'sachin123', '2024-10-22 06:50:35');
 
 -- --------------------------------------------------------
@@ -85,11 +84,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customer_id`, `name`, `address`, `phone_number`, `route`, `year`, `month`) VALUES
-(1, 'diilsan', 'DAD', 'DA', '231', 2023, '21'),
-(3, 'ssa', 'ggff', '4324324', 'ss222', 2024, '6'),
-(4, 'dsds', 'ggff', '544553', 'sadd', 2025, '0'),
-(5, 'ssas', 'dsg', '345', 'ee3', 2025, '0'),
-(6, 'ssas', 'dsg', '345', 'ee3', 2025, '0');
+(7, 'ssd', 'sss', '223', 'wws', 2024, '3');
 
 -- --------------------------------------------------------
 
@@ -98,42 +93,24 @@ INSERT INTO `customers` (`customer_id`, `name`, `address`, `phone_number`, `rout
 --
 
 CREATE TABLE `drivers` (
-  `vehicle_name` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL,
+  `vehicle_name` varchar(100) NOT NULL,
   `vehicle_no` varchar(50) NOT NULL,
-  `driver_name` varchar(255) NOT NULL,
+  `driver_name` varchar(100) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `company_code` varchar(50) NOT NULL,
   `longitude` decimal(10,8) DEFAULT NULL,
-  `latitude` decimal(11,8) DEFAULT NULL
+  `latitude` decimal(10,8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `drivers`
 --
 
-INSERT INTO `drivers` (`vehicle_name`, `vehicle_no`, `driver_name`, `username`, `password`, `longitude`, `latitude`) VALUES
-('demo', '11`22', 'sssc', 'sachin', 'sachin123', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `driver_users`
---
-
-CREATE TABLE `driver_users` (
-  `username` varchar(50) NOT NULL,
-  `company_code` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `driver_users`
---
-
-INSERT INTO `driver_users` (`username`, `company_code`, `password`) VALUES
-('gilbert', 'driver2', 'gilbert123'),
-('malitha', 'driver3', 'malitha123'),
-('sachin', 'driver1', 'sachin123');
+INSERT INTO `drivers` (`id`, `vehicle_name`, `vehicle_no`, `driver_name`, `username`, `password`, `company_code`, `longitude`, `latitude`) VALUES
+(13, 'wwe', '4455', 'cena', 'cena', 'cena123', 'driver4', 80.00000000, 7.80000000),
+(15, 'asd', 'das', 'ads', 'sachin', 'sachin123', 'driver2', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -235,19 +212,6 @@ CREATE TABLE `tea_book` (
   `factory_manager` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tea_book`
---
-
-INSERT INTO `tea_book` (`entry_id`, `customer_id`, `entry_date`, `bags`, `gross_weight`, `net_weight`, `lorry_driver`, `factory_supervisor`, `factory_manager`) VALUES
-(1, 3, '2024-10-16', 34, 45.00, 67.00, 'Driver2', 'Supervisor1', 'Manager2'),
-(2, 3, '2024-10-16', 4, 4554.00, 524.00, 'Driver2', 'Supervisor2', 'Manager1'),
-(3, 3, '2024-10-16', 4, 4554.00, 524.00, 'Driver2', 'Supervisor2', 'Manager1'),
-(16, 3, '2024-10-16', 4, 4554.00, 524.00, 'Driver2', 'Supervisor2', 'Manager1'),
-(17, 3, '2024-10-16', 4, 4554.00, 524.00, 'Driver2', 'Supervisor2', 'Manager1'),
-(18, 3, '2024-10-16', 4, 4554.00, 524.00, 'Driver2', 'Supervisor2', 'Manager1'),
-(19, 3, '2024-10-08', 2, 23.00, 43.00, 'Driver1', 'Supervisor2', 'Manager2');
-
 -- --------------------------------------------------------
 
 --
@@ -296,13 +260,9 @@ ALTER TABLE `customers`
 -- Indexes for table `drivers`
 --
 ALTER TABLE `drivers`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indexes for table `driver_users`
---
-ALTER TABLE `driver_users`
-  ADD PRIMARY KEY (`username`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `company_code` (`company_code`);
 
 --
 -- Indexes for table `inventory`
@@ -357,7 +317,13 @@ ALTER TABLE `contact_users`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `drivers`
+--
+ALTER TABLE `drivers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `inventory`
@@ -381,7 +347,7 @@ ALTER TABLE `supply`
 -- AUTO_INCREMENT for table `tea_book`
 --
 ALTER TABLE `tea_book`
-  MODIFY `entry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `entry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `users`

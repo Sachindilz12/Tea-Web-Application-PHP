@@ -19,6 +19,7 @@ google.charts.setOnLoadCallback(drawsalesnov);
 google.charts.setOnLoadCallback(drawsalesdec);
 google.charts.setOnLoadCallback(drawsalesgross);
 
+
 function drawsales2019() {
   var data = google.visualization.arrayToDataTable([
     ['Month', 'Sales'],

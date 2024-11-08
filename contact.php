@@ -61,9 +61,18 @@
             </div>
             
             <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-            </div>
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="6" required>
+Route: 
+Customer ID: 
+Customer Name: 
+Tea Bag: 
+Weight: 
+Water: 
+Tea Quality: 
+    </textarea>
+</div>
+
             
             <button type="submit">Send Message</button>
         </form>

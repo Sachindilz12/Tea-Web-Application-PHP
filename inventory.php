@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $weight = $_POST['weight'];
         $total_weight = $_POST['total_weight'];
         $price = $_POST['price'];
-
         $stmt = $conn->prepare("INSERT INTO inventory (date, time, tea_type, sales_proceeds, selling_mark, quantity, weight, total_weight, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("sssssddds", $date, $time, $tea_type, $sales_proceeds, $selling_mark, $quantity, $weight, $total_weight, $price);
         $stmt->execute();
         $stmt->close();
+
     } elseif (isset($_POST['update'])) {
         // Update inventory entry
         $id = $_POST['id'];
@@ -38,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $weight = $_POST['weight'];
         $total_weight = $_POST['total_weight'];
         $price = $_POST['price'];
-
         $stmt = $conn->prepare("UPDATE inventory SET date=?, time=?, tea_type=?, sales_proceeds=?, selling_mark=?, quantity=?, weight=?, total_weight=?, price=? WHERE id=?");
         $stmt->bind_param("sssssdddi", $date, $time, $tea_type, $sales_proceeds, $selling_mark, $quantity, $weight, $total_weight, $price, $id);
         $stmt->execute();
@@ -68,7 +67,7 @@ $result = $conn->query("SELECT * FROM inventory");
     <title>Inventory - Tea Quality App</title>
     <style>
         
-        .modal {
+    .modal {
             display: none;
     position: fixed;
     top: 0;
@@ -165,6 +164,8 @@ button[type="submit"]:hover {
     </style>
 </head>
 <body>
+
+
     <header>
         <nav>
         <ul>
@@ -190,6 +191,8 @@ button[type="submit"]:hover {
         <div class="content">
             <h1>Inventory</h1>
             <button id="openFormBtn">Add New Entry</button>
+  
+
 
             <div id="popupForm" class="modal">
                 <div class="modal-content">
@@ -200,7 +203,7 @@ button[type="submit"]:hover {
                         <input type="time" name="time" required placeholder="Select Time">
                         <select name="tea_type" required>
                             <option value="">Select Tea Type</option>
-                            <option value="BM">BM</option>
+                            <option value="BM">BkkM</option>
                             <option value="BOPIA">BOPIA</option>
                             <option value="FMSG">FMSG</option>
                             <option value="PEKOE">PEKOE</option>
