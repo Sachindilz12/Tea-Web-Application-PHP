@@ -63,105 +63,10 @@ $result = $conn->query("SELECT * FROM supply");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="inventory.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/inventory.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>Supply - Tea Quality App</title>
-    <style>
-        
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        .close {
-            color: green;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: green;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        input[type="text"], input[type="date"], input[type="time"], input[type="number"], select {
-    width: 50%;
-    padding: 10px;
-    margin: 5px 0 10px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-sizing: border-box; 
-}
-
-
-input::placeholder, select::placeholder {
-    color: green; 
-    font-style: italic; 
-    font-size: 16px; 
-}
-
-        button[type="submit"] {
-            width: 50%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button[type="submit"] {
-    background-color: green;
-    padding: 10px 20px;
-    color: white;
-    border: none;
-    border-radius: 10px;
     
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-button[type="submit"]:hover {
-    background-color: #45a049;
-}
-#openFormBtn{
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-    </style>
 </head>
 <body>
 <header>
@@ -221,11 +126,12 @@ button[type="submit"]:hover {
                             <option value="BHS">Blue Hills Supper (BHS)</option>
                             <option value="BH">Blue Hills (BH)</option>
                         </select>
-                        <input type="number" name="quantity" step="any" required placeholder="Enter Quantity">
-                        <input type="number" name="weight" step="any" required placeholder="Enter Weight">
-                        <input type="number" name="total_weight" step="any" required placeholder="Enter Total Weight">
-                        <input type="number" name="price" step="any" required placeholder="Enter Price">
-                        <button type="submit" name="add">Add Entry</button>
+                        <input type="number" name="quantity" id="quantity" step="any" required placeholder="Enter Quantity">
+    <input type="number" name="weight" id="weight" step="any" required placeholder="Enter Weight">
+    <input type="number" name="total_weight" id="total_weight" step="any" required placeholder="Total Weight (Auto-calculated)" readonly>
+    <input type="number" name="price" step="any" required placeholder="Enter Price">
+    <button type="submit" name="add">Add Entry</button>
+
                     </form>
                 </div>
             </div>
@@ -307,5 +213,25 @@ button[type="submit"]:hover {
             }
         }
     </script>
+
+
+<script>
+    // Get input elements
+    const quantityInput = document.getElementById("quantity");
+    const weightInput = document.getElementById("weight");
+    const totalWeightInput = document.getElementById("total_weight");
+
+    // Function to update total weight
+    function updateTotalWeight() {
+        const quantity = parseFloat(quantityInput.value) || 0; // Default to 0 if empty
+        const weight = parseFloat(weightInput.value) || 0; // Default to 0 if empty
+        totalWeightInput.value = (quantity * weight).toFixed(2); // Calculate and set total weight
+    }
+
+    // Add event listeners to quantity and weight inputs
+    quantityInput.addEventListener("input", updateTotalWeight);
+    weightInput.addEventListener("input", updateTotalWeight);
+</script>
+
 </body>
 </html>

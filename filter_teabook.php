@@ -84,8 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['filter'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filter Tea Book Entries</title>
-    <link rel="stylesheet" href="filter_teabook.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/filter_teabook.css">
+    <link rel="stylesheet" href="css/main.css">
     <button onclick="window.location.href='teabook.php'" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 20px; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#45a049'" onmouseout="this.style.backgroundColor='#4CAF50'">
     Go Back to Teabook
 </button>

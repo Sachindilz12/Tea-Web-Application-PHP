@@ -4,7 +4,7 @@ require 'db.php'; // Ensure this file contains your database connection
 $signup_error = '';
 $signup_success = '';
 
-$allowed_company_codes = ['admin1', 'admin2', 'admin3', 'driver1', 'driver2', 'driver3'];
+$allowed_company_codes = ['A10078', 'A10079', 'A10080', 'D50010', 'D50011', 'D50012'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['signup'])) {
     $username = $_POST['username'];
@@ -49,8 +49,8 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/signup.css">
     <title>Signup - Scan</title>
 </head>
 <body>

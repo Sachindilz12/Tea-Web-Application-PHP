@@ -10,14 +10,75 @@ if (!isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="weight.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/weight.css">
 
     <title>Weight Prediction - Tea Quality App</title>
    
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="js/charts.js"></script>
-  
+  <style>
+    /* Basic styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Button styles */
+#showChartButton {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+#showChartButton:hover {
+    background-color: #45a049;
+}
+
+/* Popup styles */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    z-index: 1000;
+}
+
+.popup-content {
+    position: relative;
+    margin:auto;
+    padding: auto;
+    background: white;
+    
+    max-width: auto;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Close button styles */
+#closePopup {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+#closePopup:hover {
+    color: red;
+}
+
+  </style>
   </head>
   <body>
   <header>
@@ -45,8 +106,13 @@ if (!isset($_SESSION['username'])) {
        </ul>  
         </nav>
     </header>
+
+
+
+
     <div class="weight_chart">
     <h1>Weight Prediction Yearly </h1>
+
     <div id="weight2019" style="width: 100%; height: 500px;"></div>
     <div id="weight2020" style="width: 100%; height: 500px;"></div>
     <div id="weight2021" style="width: 100%; height: 500px;"></div>
@@ -98,6 +164,21 @@ if (!isset($_SESSION['username'])) {
             </select>
             <button type="submit">Predict</button>
         </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {

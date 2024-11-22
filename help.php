@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help - Admin Dashboard Guide</title>
-    <link rel="stylesheet" href="js/help.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/help.css">
+    <link rel="stylesheet" href="css/main.css">
 
 </head>
 <body>

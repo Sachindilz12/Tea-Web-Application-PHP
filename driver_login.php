@@ -34,8 +34,8 @@ mysqli_close($conn);
 <html>
 <head>
     <title>Driver Login</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login.css">
 
 </head>
 <body>

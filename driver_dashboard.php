@@ -22,8 +22,8 @@ mysqli_close($conn);
 <html>
 <head>
     <title>Driver Dashboard</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="driver_dashboard.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/driver_dashboard.css">
     <script>
         // Function to get and update location
         function updateLocation() {

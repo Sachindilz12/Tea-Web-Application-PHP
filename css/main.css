@@ -9,39 +9,14 @@
         100% { opacity: 1; }
       }
      
-      @keyframes change{
-        0%
-        {
-            
-            background-image: url(Images/gg1.jpg);
-            
-        }
-        20%
-        {
-            
-            background-image: url(Images/gg2.jpg);
-        }
-        40%
-        {
-            
-            background-image: url(Images/gg3.jpg);
-        }
-        60%
-        {
-            
-            background-image: url(Images/gg4.jpg);
-        }
-        80%
-        {
-            
-            background-image: url(Images/gg5.jpg);
-        }
-        100%
-        {
-           
-            background-image : url(Images/gg6.jpeg);
-        }
-    }
+      @keyframes change {
+        0% { background-image: url(../Images/gg1.jpg); }
+        20% { background-image: url(../Images/gg2.jpg); }
+        40% { background-image: url(../Images/gg3.jpg); }
+        60% { background-image: url(../Images/gg4.jpg); }
+        80% { background-image: url(../Images/gg5.jpg); }
+        100% { background-image: url(../Images/gg6.jpeg); }
+      }
       
 body{
   

@@ -1,3 +1,38 @@
+.langform {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 20px;
+}
+
+.langform form {
+  display: inline-block;
+}
+
+.langform select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.langform select:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: #e9f5ff;
+}
+
+.langform select option {
+  color: #333;
+  padding: 5px 10px;
+}
+
+.langform select option[selected] {
+  font-weight: bold;
+}
 
 
 

@@ -41,11 +41,84 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Geolocation with Google Maps</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="admin_dashboard.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/admin_dashboard.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-ykqvBfiFzqHZThbJSEJz-qDWaB3PRu4"></script>
     
+
+
+</head>
+
+<body onload="initMap()">
+<button onclick="window.location.href='tracking.php'" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 10px;">
+    Go Back to Tracking
+</button>
+
+
+    <h2>Driver Locations</h2>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div id="map" style="height: 700px; width: 700px; border: 2px solid #333; border-radius: 8px;"></div>
+</div>
+<div id="location" style="text-align: center; margin-top: 10px;"></div>
+
+<h2>Drivers List</h2>
+
+
+    <!-- Add Driver Button to open the popup -->
+<button onclick="openForm()" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 50px auto; display: block;">
+    Add New Driver
+</button>
+
+<!-- Popup Form Container -->
+
+
+<div id="popupForm" class="form-popup">
+    <form method="POST" action="" class="form-container">
+        <h2>Add a New Driver</h2>
+        Vehicle Name: <input type="text" name="vehicle_name" required><br>
+        Vehicle Number: <input type="text" name="vehicle_no" required><br>
+        Driver Name: <input type="text" name="driver_name" required><br>
+        Username: <input type="text" name="username" required><br>
+        Password: <input type="password" name="password" required><br>
+        Company Code: <input type="text" name="company_code" required><br>
+        <input type="submit" name="add_driver" value="Add Driver">
+        <button type="button" onclick="closeForm()" class="btn cancel">Close</button>
+    </form>
+</div>
+
+
+    <table border="1">
+        <tr>
+            <th>Vehicle Name</th>
+            <th>Vehicle Number</th>
+            <th>Driver Name</th>
+            <th>Username</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+        </tr>
+        <?php foreach ($drivers as $driver): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($driver['vehicle_name']); ?></td>
+                <td><?php echo htmlspecialchars($driver['vehicle_no']); ?></td>
+                <td><?php echo htmlspecialchars($driver['driver_name']); ?></td>
+                <td><?php echo htmlspecialchars($driver['username']); ?></td>
+                <td><?php echo htmlspecialchars($driver['longitude']); ?></td>
+                <td><?php echo htmlspecialchars($driver['latitude']); ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+
     <script>
+    function openForm() {
+        document.getElementById("popupForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("popupForm").style.display = "none";
+    }
+</script>
+
+<script>
         var map;
         var infoWindow;
         var drivers = <?php echo json_encode($drivers); ?>;
@@ -125,182 +198,6 @@ mysqli_close($conn);
     </script>
 
 
-<style>/* Popup Form Overlay */
-/* Popup Form Overlay */
-.form-popup, .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-/* Popup Form Container */
-.form-container, .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 500px;
- font-family: Poppins;
-    width: 90%;
-}
-
-.close {
-            position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    color: #aaa;
-    cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: green;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-/* Input Fields */
-input[type="text"], input[type="date"], input[type="time"], input[type="number"],input[type="password"], select {
-    width: 50%;
-    padding: 10px;
-    margin: 5px 0 10px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-sizing: border-box;
-}
-
-
-/* Submit Button */
-input[type="submit"] {
-    width: 100%;
-    background-color: green;
-    padding: 10px 20px;
-    margin: 5px;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-/* Open Form Button */
-#openFormBtn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-#openFormBtn:hover {
-    background-color: #45a049;
-}
-
-/* Cancel Button in Form Container */
-.form-container .btn.cancel {
-    background-color: #dc3545;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
-}
-.form-container .btn.cancel:hover {
-    background-color: #c82333;
-}
-
-</style>
-
-
-
-
-
-</head>
-
-<body onload="initMap()">
-<button onclick="window.location.href='tracking.php'" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 10px;">
-    Go Back to Tracking
-</button>
-
-
-    <h2>Driver Locations</h2>
-    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-    <div id="map" style="height: 700px; width: 700px; border: 2px solid #333; border-radius: 8px;"></div>
-</div>
-<div id="location" style="text-align: center; margin-top: 10px;"></div>
-
-<h2>Drivers List</h2>
-
-
-    <!-- Add Driver Button to open the popup -->
-<button onclick="openForm()" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 50px auto; display: block;">
-    Add New Driver
-</button>
-
-<!-- Popup Form Container -->
-
-
-<div id="popupForm" class="form-popup">
-    <form method="POST" action="" class="form-container">
-        <h2>Add a New Driver</h2>
-        Vehicle Name: <input type="text" name="vehicle_name" required><br>
-        Vehicle Number: <input type="text" name="vehicle_no" required><br>
-        Driver Name: <input type="text" name="driver_name" required><br>
-        Username: <input type="text" name="username" required><br>
-        Password: <input type="password" name="password" required><br>
-        Company Code: <input type="text" name="company_code" required><br>
-        <input type="submit" name="add_driver" value="Add Driver">
-        <button type="button" onclick="closeForm()" class="btn cancel">Close</button>
-    </form>
-</div>
-
-
-    <table border="1">
-        <tr>
-            <th>Vehicle Name</th>
-            <th>Vehicle Number</th>
-            <th>Driver Name</th>
-            <th>Username</th>
-            <th>Longitude</th>
-            <th>Latitude</th>
-        </tr>
-        <?php foreach ($drivers as $driver): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($driver['vehicle_name']); ?></td>
-                <td><?php echo htmlspecialchars($driver['vehicle_no']); ?></td>
-                <td><?php echo htmlspecialchars($driver['driver_name']); ?></td>
-                <td><?php echo htmlspecialchars($driver['username']); ?></td>
-                <td><?php echo htmlspecialchars($driver['longitude']); ?></td>
-                <td><?php echo htmlspecialchars($driver['latitude']); ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-
-    <script>
-    function openForm() {
-        document.getElementById("popupForm").style.display = "block";
-    }
-
-    function closeForm() {
-        document.getElementById("popupForm").style.display = "none";
-    }
-</script>
 
 
 </body>

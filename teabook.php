@@ -43,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_tea_book'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teabook Management</title>
-    <link rel="stylesheet" href="teabook.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/teabook.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <header>
@@ -64,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_tea_book'])) {
                 <li><a href="tracking.php">Tracking</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="help.php">Help</a></li>
-
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
