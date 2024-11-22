@@ -15,22 +15,6 @@ $sql = "SELECT vehicle_name, vehicle_no, driver_name, longitude, latitude FROM d
 $result = mysqli_query($conn, $sql);
 $driver_data = mysqli_fetch_assoc($result);
 
-// Update location if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_location'])) {
-    $longitude = $_POST['longitude'];
-    $latitude = $_POST['latitude'];
-
-    $update_sql = "UPDATE drivers SET longitude = '$longitude', latitude = '$latitude' WHERE username = '$username'";
-    if (mysqli_query($conn, $update_sql)) {
-        echo "Location updated successfully.";
-        // Reload the page to reflect changes
-        header("Location: driver_dashboard.php");
-        exit();
-    } else {
-        echo "Error updating location: " . mysqli_error($conn);
-    }
-}
-
 mysqli_close($conn);
 ?>
 
@@ -40,12 +24,37 @@ mysqli_close($conn);
     <title>Driver Dashboard</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="driver_dashboard.css">
+    <script>
+        // Function to get and update location
+        function updateLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var longitude = position.coords.longitude;
+                    var latitude = position.coords.latitude;
 
+                    // Send location data to update_location.php via AJAX
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "update_location.php", true);
+                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            document.getElementById("status").innerHTML = "Location updated successfully.";
+                        }
+                    };
+                    xhr.send("longitude=" + longitude + "&latitude=" + latitude);
+                });
+            } else {
+                document.getElementById("status").innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        // Automatically update location when the page loads
+        window.onload = updateLocation;
+    </script>
 </head>
 <body>
-<button  onclick="window.location.href='tracking.php'" id="sd">Go Back to Tracking</button>
+    <button onclick="window.location.href='tracking.php'" id="sd">Go Back to Tracking</button>
 
-    
     <h1>Welcome, <?php echo htmlspecialchars($driver_data['driver_name']); ?></h1>
     <h2>Vehicle Information</h2>
     <p><strong>Vehicle Name:</strong> <?php echo htmlspecialchars($driver_data['vehicle_name']); ?></p>
@@ -55,12 +64,7 @@ mysqli_close($conn);
     <p><strong>Longitude:</strong> <?php echo htmlspecialchars($driver_data['longitude']); ?></p>
     <p><strong>Latitude:</strong> <?php echo htmlspecialchars($driver_data['latitude']); ?></p>
 
-    <form method="POST" action="">
-        <h3>Update Location</h3>
-        Longitude: <input type="text" name="longitude" required><br>
-        Latitude: <input type="text" name="latitude" required><br>
-        <input type="submit" name="update_location" value="Update Location">
-    </form>
+    <p id="status"></p> <!-- Status message for location update -->
 
     <a href="logout.php">Logout</a>
 </body>

@@ -63,6 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_tea_book'])) {
                 </li>
                 <li><a href="tracking.php">Tracking</a></li>
                 <li><a href="contact.php">Contact</a></li>
+                <li><a href="help.php">Help</a></li>
+
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>

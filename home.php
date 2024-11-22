@@ -86,6 +86,7 @@ include "languages/" . $_SESSION['lang'] . ".php";
                 </li>
                 <li><a href="tracking.php">Tracking</a></li>
                 <li><a href="contact.php">Contact</a></li>
+                <li><a href="help.php">Help</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>

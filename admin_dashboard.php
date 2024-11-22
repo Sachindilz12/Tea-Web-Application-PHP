@@ -2,11 +2,6 @@
 session_start();
 include('db.php');
 
-// Check if the user is logged in
-if (!isset($_SESSION['username']) || !isset($_SESSION['company_code'])) {
-    header("Location: admin_dashboard.php");
-    exit();
-}
 
 // Handle form submission to add a new driver
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_driver'])) {
@@ -309,4 +304,4 @@ input[type="submit"]:hover {
 
 
 </body>
-</html>
+</html> 
